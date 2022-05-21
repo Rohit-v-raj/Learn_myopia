@@ -1,12 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine.UI;
 using UnityEngine;
+using UnityEngine.UI;
 
-public class Elongation : MonoBehaviour
+public class Curvature : MonoBehaviour
 {
     // Start is called before the first frame update
-    public int state;
+    public int _state;
     [SerializeField] GameObject eye_normal;
     [SerializeField] GameObject eye_def;
     [SerializeField] GameObject eye_cur;
@@ -14,19 +14,16 @@ public class Elongation : MonoBehaviour
     [SerializeField] GameObject _dest;
     [SerializeField] Slider slider;
     [SerializeField] GameObject lens;
-    [SerializeField] GameObject clens;
+    [SerializeField] GameObject dlens;
     [SerializeField] GameObject c_lens;
-    public Animator ball_ani;
-    Curvature curvature;
 
-    public int anim;
-    private int _lens;
+    private int lens_;
 
 
     void Start()
     {
-        state = 0;
-        _lens = 0;
+        _state = 0;
+        lens_ = 0;
         eye_normal.SetActive(true);
         eye_cur.SetActive(false);
         eye_def.SetActive(false);
@@ -35,13 +32,13 @@ public class Elongation : MonoBehaviour
     }
     private void Update()
     {
-        if(state==1&_lens==0)
+        if (_state == 1 & lens_ == 0)
         {
             Vector3 pos = _object.transform.position;
-            if(pos.x<16)
+            if (pos.x < 16)
             {
                 Vector3 _pos = _dest.transform.position;
-                _pos.x = (20+(slider.value/(float)12.515))*(float)1.2048;
+                _pos.x = (20 + (slider.value / (float)12.515)) * (float)1.2048;
                 _dest.transform.position = _pos;
             }
             else
@@ -55,52 +52,50 @@ public class Elongation : MonoBehaviour
 
     // Update is called once per frame
 
-    public void L_Button_clicked()
+    public void Ls_Button_clicked()
     {
-        if (_lens == 0)
+        if (lens_ == 0)
         {
             c_lens.SetActive(true);
             Vector3 _pos = _dest.transform.position;
             _pos.x = (float)25.8145;
             _dest.transform.position = _pos;
-            _lens = 1;
+            lens_ = 1;
         }
         else
         {
-            _lens = 0;
+            lens_ = 0;
             c_lens.SetActive(false);
         }
 
     }
-    public void Cr_Button_clicked()
+
+    public void D_Button_clicked()
     {
-        state = 0;
-        _lens = 0;
+        _state = 0;
+        lens_ = 0;
     }
-
-
-    public void E_Button_clicked() 
+    public void C_Button_clicked()
     {
-        if(state==0)
-        {          
-            eye_cur.SetActive(false);
+        if (_state == 0)
+        {
             eye_normal.SetActive(false);
-            eye_def.SetActive(true);
+            eye_cur.SetActive(true);
+            eye_def.SetActive(false);
             c_lens.SetActive(false);
-            clens.SetActive(false);
+            dlens.SetActive(false);
             lens.SetActive(true);
-            ball_ani.enabled = true;
-            state = 1;
+            _state = 1;
         }
         else
         {
-            eye_cur.SetActive(false);
             eye_normal.SetActive(true);
             lens.SetActive(false);
-            clens.SetActive(false);
+            dlens.SetActive(false);
             c_lens.SetActive(false);
+            eye_cur.SetActive(false);
             eye_def.SetActive(false);
-            state = 0;
+            _state = 0;
         }
     }
 }
