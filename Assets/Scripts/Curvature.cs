@@ -38,13 +38,13 @@ public class Curvature : MonoBehaviour
             if (pos.x < 16)
             {
                 Vector3 _pos = _dest.transform.position;
-                _pos.x = (20 + (slider.value / (float)12.515)) * (float)1.2048;
+                _pos.x = (20 + (slider.value / (float)16.235)) * (float)1.195;
                 _dest.transform.position = _pos;
             }
             else
             {
                 Vector3 _pos = _dest.transform.position;
-                _pos.x = (float)25.8145;
+                _pos.x = (float)25.4;
                 _dest.transform.position = _pos;
             }
         }
@@ -58,7 +58,7 @@ public class Curvature : MonoBehaviour
         {
             c_lens.SetActive(true);
             Vector3 _pos = _dest.transform.position;
-            _pos.x = (float)25.8145;
+            _pos.x = (float)25.4;
             _dest.transform.position = _pos;
             lens_ = 1;
         }
